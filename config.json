@@ -1,0 +1,6 @@
+{
+  "GCLOUD_PROJECT": "nbafinalbracket",
+  "DATA_BACKEND": "mongodb",
+  "MONGO_URL": "mongodb://jasonqu:AuGm8xX9@ds135790.mlab.com:35790/jason-mongo",
+  "MONGO_COLLECTION": "baskets"
+}
