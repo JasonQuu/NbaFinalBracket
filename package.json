@@ -1,18 +1,22 @@
 {
   "name": "nba-final-brackets",
   "version": "1.0.0",
+  "private": true,
   "description": "this is a bracket app fir NBA finals",
   "main": "server.js",
+  "engines": {
+    "node": ">=4.3.2"
+  },
   "dependencies": {
     "express": "^4.15.2",
     "body-parser": "^1.4.3",
     "method-override": "^2.1.3",
     "morgan": "^1.1.1",
-    "mongoose"       : "^4.4.12"
+    "mongoose": "^4.4.12"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
