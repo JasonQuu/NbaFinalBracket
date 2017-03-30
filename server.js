@@ -6,10 +6,12 @@ const mongoose = require('mongoose');                     // mongoose for mongod
 const bodyParser = require('body-parser');    // pull information from HTML POST (express4)
 const methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 
+//require('./public/app.js')(app);
+
 // configuration =================
 mongoose.connect('mongodb://jasonqu:AuGm8xX9@ds135790.mlab.com:35790/jason-mongo');     // connect to mongoDB database on modulus.io
 
-app.use(express.static('public'));
+app.use('/public',express.static('public'));
 //app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users
 app.use(morgan('dev'));                                         // log every request to the console
 app.use(bodyParser.urlencoded({'extended': 'true'}));            // parse application/x-www-form-urlencoded
@@ -17,9 +19,6 @@ app.use(bodyParser.json());                                     // parse applica
 app.use(bodyParser.json({type: 'application/vnd.api+json'})); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
-// app.get('*', function(req, res) {
-//     res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
-// });
 
 // define model =================
 var Baskets = mongoose.model('Baskets', {
@@ -38,7 +37,7 @@ app.get('/api/result', function (req, res) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err)
-            res.send(err)
+            res.send(err);
 
         res.json(Baskets); // return all todos in JSON format
     });
@@ -62,7 +61,7 @@ app.post('/api/basket', function (req, res) {
         // get and return all the todos after you create another
         Baskets.find(function (err, baskets) {
             if (err)
-                res.send(err)
+                res.send(err);
             res.json(baskets);
         });
     });
@@ -93,6 +92,10 @@ app.post('/api/newBasket', function (req, res) {
 });
 
 
+app.get('', function (req, res) {
+    res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+});
+
 // listen (start app with node server.js) ======================================
-app.listen(8080);
+app.listen(8081);
 console.log("App listening on port 8080");
