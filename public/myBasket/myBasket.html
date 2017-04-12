@@ -1,0 +1,131 @@
+<md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding="" ng-hide="uiConfig.showBasket">
+    <div>
+      <md-input-container>
+        <label>Email</label>
+        <input ng-model="user.email" type="email">
+      </md-input-container>
+      <div>
+        <md-button class="md-raised" data-ng-click="getMyBasket(user)">Get my bracket</md-button>
+      </div>
+
+      <p>Note: Your email is your unique key to access your bracket and getting update, please make sure it's correct.</p>
+    </div>
+  </md-content>
+
+<section id="bracket" ng-show="uiConfig.showBasket">
+  <md-input-container ng-if="::myBasket.basketName.length < 1">
+    <label>Bracket Name</label>
+    <input ng-model="myBasket.basketName">
+  </md-input-container>
+  <h2 ng-show="myBasket.basketName.length > 0">{{myBasket.basketName}}</h2>
+      <div data-ng-if="myBasket.basketName.length > 0">
+        <md-button class="md-raised md-primary saveBtn" data-ng-click="saveMyBasket()">SAVE</md-button>
+      </div>
+      <div class="container">
+        <div class="split split-one">
+            <div class="round round-one current">
+                <div class="round-details">Round 1<br/><span class="date">April 16</span></div>
+                <ul class="matchup">
+                    <li class="team team-top" data-ng-click="setBasket('gsw', 'round1', 0); "><span class="gsw teamIcon"></span>Golden State
+                    </li>
+                    <li class="team team-bottom" data-ng-click="setBasket('por', 'round1', 0)"><span class="por teamIcon"></span>Portland </span></li>
+                </ul>
+                <ul class="matchup">
+                    <li class="team team-top" data-ng-click="setBasket('sas', 'round1', 1)"><span class="sas teamIcon"></span>San Antonio </span></li>
+                    <li class="team team-bottom" data-ng-click="setBasket('mem', 'round1', 1)"><span class="mem teamIcon"></span>Memphis </span></li>
+                </ul>
+                <ul class="matchup">
+                    <li class="team team-top" data-ng-click="setBasket('hou', 'round1', 2)"><span class="hou teamIcon"></span>Houston</span></li>
+                    <li class="team team-bottom" data-ng-click="setBasket('okc', 'round1', 2)"><span class="okc teamIcon"></span>Oklahoma City</span></li>
+                </ul>
+                <ul class="matchup">
+                    <li class="team team-top" data-ng-click="setBasket('uta', 'round1', 3)"><span class="uta teamIcon"></span>Utah</span></li>
+                    <li class="team team-bottom" data-ng-click="setBasket('lac', 'round1', 3)"><span class="lac teamIcon"></span>LA</span></li>
+                </ul>
+            </div>	<!-- END ROUND ONE -->
+
+            <div class="round round-two">
+                <div class="round-details">Round 2<br/><span class="date">May 1</span></div>
+                <ul class="matchup">
+                    <li class="team team-top" data-ng-click="setBasket(myBasket.basket.round1[0].alies, 'semiConf', 0)"><span class="{{myBasket.basket.round1[0].alies}} teamIcon"></span>{{myBasket.basket.round1[0].name}}&nbsp;</span></li>
+                    <li class="team team-bottom" data-ng-click="setBasket(myBasket.basket.round1[1].alies, 'semiConf', 0)"><span class="{{myBasket.basket.round1[1].alies}} teamIcon"></span>{{myBasket.basket.round1[1].name}}&nbsp;</span></li>
+                </ul>
+                <ul class="matchup">
+                    <li class="team team-top" data-ng-click="setBasket(myBasket.basket.round1[2].alies, 'semiConf', 1)"><span class="{{myBasket.basket.round1[2].alies}} teamIcon"></span>{{myBasket.basket.round1[2].name}}&nbsp;</span></li>
+                    <li class="team team-bottom" data-ng-click="setBasket(myBasket.basket.round1[3].alies, 'semiConf', 1)"><span class="{{myBasket.basket.round1[3].alies}} teamIcon"></span>{{myBasket.basket.round1[3].name}}&nbsp;</span></li>
+                </ul>
+            </div>	<!-- END ROUND TWO -->
+
+            <div class="round round-three">
+                <div class="round-details">Round 3<br/><span class="date">May 16</span></div>
+                <ul class="matchup">
+                    <li class="team team-top" data-ng-click="setBasket(myBasket.basket.semiConf[0].alies, 'conf', 0)"><span class="{{myBasket.basket.semiConf[0].alies}} teamIcon"></span>{{myBasket.basket.semiConf[0].name}}&nbsp;</span></li>
+                    <li class="team team-bottom" data-ng-click="setBasket(myBasket.basket.semiConf[1].alies, 'conf', 0)"><span class="{{myBasket.basket.semiConf[1].alies}} teamIcon"></span>{{myBasket.basket.semiConf[1].name}}&nbsp;</span></li>
+                </ul>
+            </div>	<!-- END ROUND THREE -->
+        </div>
+
+        <div class="champion">
+
+            <div class="final">
+                <i class="fa fa-trophy"></i>
+                <div class="round-details">championship <br/><span class="date">June 1</span></div>
+                <ul class ="matchup championship">
+                    <li class="team team-top" data-ng-click="setBasket(myBasket.basket.conf[0].alies, 'final', 0)"><span class="{{myBasket.basket.conf[0].alies}} teamIcon"></span>{{myBasket.basket.conf[0].name}}<span class="vote-count">&nbsp;</span></li>
+                    <li class="team team-bottom" data-ng-click="setBasket(myBasket.basket.conf[1].alies, 'final', 0)"><span class="{{myBasket.basket.conf[1].alies}} teamIcon"></span>{{myBasket.basket.conf[1].name}}<span class="vote-count">&nbsp;</span></li>
+                </ul>
+            </div>
+
+            <div class="semis-r">
+                <div class="round-details">Champagin <br/><span class="date">June 12</span></div>
+                <ul class ="matchup championship">
+                    <li class="team team-top"><span class="{{myBasket.basket.fianl[0].alies}} teamIcon"></span>{{myBasket.basket.final[0].name}}<span class="vote-count">&nbsp;</span></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="split split-two">
+
+
+            <div class="round round-three">
+                <div class="round-details">Round 3<br/><span class="date">May 16</span></div>
+                <ul class="matchup">
+                    <li class="team team-top" data-ng-click="setBasket(myBasket.basket.semiConf[2].alies, 'conf', 1)"><span class="{{myBasket.basket.semiConf[2].alies}} teamIcon"></span>{{myBasket.basket.semiConf[2].name}}&nbsp;</span></li>
+                    <li class="team team-bottom" data-ng-click="setBasket(myBasket.basket.semiConf[3].alies, 'conf', 1)"><span class="{{myBasket.basket.semiConf[3].alies}} teamIcon"></span>{{myBasket.basket.semiConf[3].name}}&nbsp;</span></li>
+                </ul>
+            </div>	<!-- END ROUND THREE -->
+
+            <div class="round round-two">
+                <div class="round-details">Round 2<br/><span class="date">May 1</span></div>
+                <ul class="matchup">
+                    <li class="team team-top" data-ng-click="setBasket(myBasket.basket.round1[4].alies, 'semiConf', 2)"><span class="{{myBasket.basket.round1[4].alies}} teamIcon"></span>{{myBasket.basket.round1[4].name}}&nbsp;</span></li>
+                    <li class="team team-bottom" data-ng-click="setBasket(myBasket.basket.round1[5].alies, 'semiConf', 2)"><span class="{{myBasket.basket.round1[5].alies}} teamIcon"></span>{{myBasket.basket.round1[5].name}}&nbsp;</span></li>
+                </ul>
+                <ul class="matchup">
+                    <li class="team team-top" data-ng-click="setBasket(myBasket.basket.round1[6].alies, 'semiConf', 3)"><span class="{{myBasket.basket.round1[6].alies}} teamIcon"></span>{{myBasket.basket.round1[6].name}}&nbsp;</span></li>
+                    <li class="team team-bottom" data-ng-click="setBasket(myBasket.basket.round1[7].alies, 'semiConf', 3)"><span class="{{myBasket.basket.round1[7].alies}} teamIcon"></span>{{myBasket.basket.round1[7].name}}&nbsp;</span></li>
+                </ul>
+            </div>	<!-- END ROUND TWO -->
+            <div class="round round-one current">
+                <div class="round-details">Round 1<br/><span class="date">April 16</span></div>
+                <ul class="matchup">
+                    <li class="team team-top" data-ng-click="setBasket('clc', 'round1', 4)"><span class="clc teamIcon"></span>Cleveland</span></li>
+                    <li class="team team-bottom" data-ng-click="setBasket('mia', 'round1', 4)"><span class="mia teamIcon"></span>Miami</span></li>
+                </ul>
+                <ul class="matchup">
+                    <li class="team team-top" data-ng-click="setBasket('bos', 'round1', 5)"><span class="bos teamIcon"></span>Boston</span></li>
+                    <li class="team team-bottom" data-ng-click="setBasket('chi', 'round1', 5)"><span class="chi teamIcon"></span>Chicago</span></li>
+                </ul>
+                <ul class="matchup">
+                    <li class="team team-top" data-ng-click="setBasket('tor', 'round1', 6)"><span class="tor teamIcon"></span>Tronto</span></li>
+                    <li class="team team-bottom" data-ng-click="setBasket('atl', 'round1', 6)"><span class="atl teamIcon"></span>Atlanta</span></li>
+                </ul>
+                <ul class="matchup">
+                    <li class="team team-top" data-ng-click="setBasket('was', 'round1', 7)"><span class="was teamIcon"></span>Washington</span></li>
+                    <li class="team team-bottom" data-ng-click="setBasket('mil', 'round1', 7)"><span class="mil teamIcon"></span>Milwaukee</span></li>
+                </ul>
+            </div>	<!-- END ROUND ONE -->
+        </div>
+    </div>
+</section>
