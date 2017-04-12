@@ -131,14 +131,4 @@ app.controller('AppCtrl',['$scope', '$http',function AppCtrl($scope, $http) {
 
   //getData();
 
-  $scope.myBasket = {
-      user: 'jasonqu',
-      basket: {
-          round1: ['GSW','w2','w3','w4','e1','e2', 'e3', 'e4'],
-          semConf: ['w1','w3','e2','e1'],
-          conf: ['w1','e1'],
-          final: ['w1']
-      }
-  };
-
 }]);

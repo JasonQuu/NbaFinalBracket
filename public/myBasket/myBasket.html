@@ -2,25 +2,22 @@
     <div>
       <md-input-container>
         <label>Email</label>
-        <input ng-model="user.email" type="email">
+        <input ng-model="uiConfig.email" type="email">
       </md-input-container>
       <div>
-        <md-button class="md-raised" data-ng-click="getMyBasket(user)">Get my bracket</md-button>
+        <md-button class="md-raised" data-ng-click="getMyBasket(uiConfig)">Get my bracket</md-button>
       </div>
 
       <p>Note: Your email is your unique key to access your bracket and getting update, please make sure it's correct.</p>
     </div>
   </md-content>
 
-<section id="bracket" ng-show="uiConfig.showBasket">
-  <md-input-container ng-if="::myBasket.basketName.length < 1">
+<section id="bracket" ng-show="uiConfig.showBasket" data-ng-init="uiConfig.editHeader = false">
+  <md-input-container ng-show="uiConfig.editHeader || myBasket.basketName.length < 1">
     <label>Bracket Name</label>
     <input ng-model="myBasket.basketName">
   </md-input-container>
-  <h2 ng-show="myBasket.basketName.length > 0">{{myBasket.basketName}}</h2>
-      <div data-ng-if="myBasket.basketName.length > 0">
-        <md-button class="md-raised md-primary saveBtn" data-ng-click="saveMyBasket()">SAVE</md-button>
-      </div>
+    <p class="header" data-ng-hide="uiConfig.editHeader">{{myBasket.basketName}}<span data-ng-hide="myBasket.basketName.length > 0">Edit Name</span><span class="edit" data-ng-click="uiConfig.editHeader=true">&nbsp;&nbsp;&nbsp;</span></p>
       <div class="container">
         <div class="split split-one">
             <div class="round round-one current">
@@ -127,5 +124,9 @@
                 </ul>
             </div>	<!-- END ROUND ONE -->
         </div>
+    </div>
+
+    <div>
+        <md-button class="md-raised md-primary saveBtn" data-ng-disabled="myBasket.basketName.length < 1" data-ng-click="saveMyBasket()">SAVE</md-button>
     </div>
 </section>
