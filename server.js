@@ -23,14 +23,26 @@ app.use(methodOverride());
 // define model =================
 var Baskets = mongoose.model('Baskets', {
     user: String,
-    basket: Object
+    basketName: String,
+    basket: {
+      round1: Array,
+      semiConf: Array,
+      conf: Array,
+      final: Array
+    },
+    score: {
+      round1: Array,
+      semiConf: Array,
+      conf: Array,
+      final: Array
+    }
 });
 
 // routes ======================================================================
 
 // api ---------------------------------------------------------------------
 // get all todos
-app.get('/api/result', function (req, res) {
+app.get('/api/getAll', function (req, res) {
 
     // use mongoose to get all todos in the database
     Baskets.find(function (err, Baskets) {
@@ -39,22 +51,15 @@ app.get('/api/result', function (req, res) {
         if (err)
             res.send(err);
 
-        res.json(Baskets); // return all todos in JSON format
+        res.json(Baskets); // return all basket in JSON format
     });
 });
 
-app.post('/api/basket', function (req, res) {
+app.post('/api/updateBasket', function (req, res) {
     console.log(req.body);
     // create a todo, information comes from AJAX request from Angular
-    var query = {'user': 'jasonqu'};
-    Baskets.findOneAndUpdate(query, {
-        user: 'jasonqu',
-        basket: {
-            champagne: "GSW",
-            confChampagne: ["Test", "CLC"]
-        }
-
-    }, {upsert: true}, function (err, basket) {
+    var query = {'user': req.body.user};
+    Baskets.findOneAndUpdate(query, req.body, {upsert: true, new: false}, function (err, basket) {
         if (err)
             res.send(err);
 
@@ -71,13 +76,7 @@ app.post('/api/basket', function (req, res) {
 app.post('/api/newBasket', function (req, res) {
     console.log(req.body);
     // create a todo, information comes from AJAX request from Angular
-    Baskets.create({
-        user: 'jasonqu',
-        basket: {
-            champagne: "GSW",
-            confChampagne: ["GSW", "CLC"]
-        }
-    }, function (err, basket) {
+    Baskets.create(req.body, function (err, basket) {
         if (err)
             res.send(err);
 
@@ -92,10 +91,12 @@ app.post('/api/newBasket', function (req, res) {
 });
 
 
+
+
 app.get('', function (req, res) {
     res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
 });
 
 // listen (start app with node server.js) ======================================
-app.listen(8081);
+app.listen(8080);
 console.log("App listening on port 8080");

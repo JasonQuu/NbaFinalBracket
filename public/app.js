@@ -1,20 +1,144 @@
 'use strict';
 
-var app = angular.module('MyApp', ['ngMaterial', 'ngMessages', 'material.svgAssetsCache']);
+var app = angular.module('MyApp', ['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'ngRoute']);
 
-app.controller('AppCtrl', AppCtrl);
+app.config(['$routeProvider', '$locationProvider',
+    function($routeProvider, $locationProvider) {
+        $routeProvider.when('/game', {
+                templateUrl: 'public/chart/chart.html',
+            }).when('/rank', {
+                templateUrl: 'public/rank/rank.html',
+            }).when('/myBasket', {
+                templateUrl: 'public/myBasket/myBasket.html',
+            }).otherwise({
+            redirectTo: '/game'
+        });
+        $locationProvider.html5Mode(false);
+    }]);
 
-function AppCtrl($scope) {
-    $scope.data = {
-        selectedIndex: 0,
-        secondLocked: true,
-        secondLabel: "Item Two",
-        bottom: false
-    };
-    $scope.next = function () {
-        $scope.data.selectedIndex = Math.min($scope.data.selectedIndex + 1, 2);
-    };
-    $scope.previous = function () {
-        $scope.data.selectedIndex = Math.max($scope.data.selectedIndex - 1, 0);
-    };
-}
+app.controller('AppCtrl',['$scope', '$http',function AppCtrl($scope, $http) {
+  let allData = [], result = {};
+  $scope.uiConfig = {
+    showBasket: false,
+    teams: {
+      gsw: {
+        name: 'Golden State',
+        alies: "gsw"
+      },
+      por: {
+        name: 'Portland',
+        alies: 'por'
+      },
+      sas: {
+        name: 'San Antonio',
+        alies: 'sas'
+      },
+      mem: {
+        name: 'Memphis',
+        alies: 'mem'
+      },
+      hou: {
+        name: 'Houston',
+        alies: 'hou'
+      },
+      okc: {
+        name:'Oklahoma City',
+        alies: 'okc'
+      },
+      uta: {
+        name: 'Utah',
+        alies:'uta'
+      },
+      lac: {
+        name: 'Los Angels',
+        alies: 'lac'
+      },
+      clc: {
+        name: 'Cleveland',
+        alies: 'clc'
+      },
+      bos: {
+        name: 'Boston',
+        alies: 'bos'
+      },
+      tor: {
+        name: 'Tronto',
+        alies: 'tor'
+      },
+      was: {
+        name: 'Washington',
+        alies: 'was'
+      },
+      mil: {
+        name: 'Milwaukee',
+        alies: 'mil'
+      },
+      mia: {
+        name: 'Miami',
+        alies: 'mia'
+      },
+      atl: {
+        name: 'Atlanta',
+        alies: 'atl'
+      },
+      chi: {
+        name: 'Chicago',
+        alies: 'chi'
+      }
+    }
+  };
+
+  $http.get("/api/getAll").then(function(result){
+    allData = result.data;
+    $scope.allData = allData;
+  });
+
+
+  $scope.setBasket = function(team, round, index){
+    console.log($scope.myBasket);
+    $scope.myBasket.basket[round][index] = $scope.uiConfig.teams[team];
+  };
+
+  $scope.getMyBasket = function(user) {
+    $scope.myBasket = false;
+    for (let basket of allData) {
+      if (basket.user === user.email){
+        $scope.myBasket = basket;
+      }
+    }
+
+    if(!$scope.myBasket){
+      $scope.myBasket = {
+        user: user.email,
+        name: user.basketName,
+        basket: {
+          round1:[{},{},{},{}],
+          semiConf: [{},{},{},{}],
+          conf: [{},{}],
+          final: [{}]
+        },
+        score: {
+        }
+      };
+      $http.post("/api/newBasket", $scope.myBasket)
+    }
+    $scope.uiConfig.showBasket = true;
+  };
+
+  $scope.saveMyBasket = function(){
+    $http.post("/api/updateBasket", $scope.myBasket)
+  }
+
+  //getData();
+
+  $scope.myBasket = {
+      user: 'jasonqu',
+      basket: {
+          round1: ['GSW','w2','w3','w4','e1','e2', 'e3', 'e4'],
+          semConf: ['w1','w3','e2','e1'],
+          conf: ['w1','e1'],
+          final: ['w1']
+      }
+  };
+
+}]);
