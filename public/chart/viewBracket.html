@@ -1,0 +1,126 @@
+<md-dialog flex="80">
+    <p class="header">{{currentBracket.basketName}}&nbsp;&nbsp;&nbsp;</span></p>
+      <div class="container">
+        <div class="split split-one">
+            <div class="round round-one current">
+                <div class="round-details">Round 1<br/><span class="date">April 15</span></div>
+                <ul class="matchup">
+                    <li class="team team-top"><span class="gsw teamIcon"></span>1 Golden State</li>
+                    <li class="scoreInput">Total Games:{{currentBracket.score.round1[0]}}</li>
+                    <li class="team team-bottom"><span class="por teamIcon"></span>8 Portland </span></li>
+                </ul>
+                <ul class="matchup">
+                    <li class="team team-top"><span class="uta teamIcon"></span>Utah</li>
+                    <li class="scoreInput">Total Games:{{currentBracket.score.round1[1]}}></li>
+                    <li class="team team-bottom"><span class="lac teamIcon"></span>LA</span></li>
+                </ul>
+                <ul class="matchup">
+                  <li class="team team-top"><span class="hou teamIcon"></span>3 Houston</li>
+                  <li class="scoreInput">Total Games{{currentBracket.score.round1[2]}}</li>
+                  <li class="team team-bottom"><span class="okc teamIcon"></span>6 Oklahoma City</span></li>
+                </ul>
+                <ul class="matchup">
+                  <li class="team team-top"><span class="sas teamIcon"></span>2 San Antonio</li>
+                  <li class="scoreInput">Total Games{{currentBracket.score.round1[2]}}</li>
+                  <li class="team team-bottom"><span class="mem teamIcon"></span>7 Memphis </span></li>
+                </ul>
+            </div>	<!-- END ROUND ONE -->
+
+            <div class="round round-two">
+                <div class="round-details">Round 2<br/><span class="date">May 1</span></div>
+                <ul class="matchup">
+                    <li class="team team-top"><span class="{{currentBracket.basket.round1[0].alies}} teamIcon"></span>{{currentBracket.basket.round1[0].name}}&nbsp;</span></li>
+                    <li class="scoreInput">Total Games:{{currentBracket.score.semiConf[0]}}</li>
+                    <li class="team team-bottom"><span class="{{currentBracket.basket.round1[1].alies}} teamIcon"></span>{{currentBracket.basket.round1[1].name}}&nbsp;</span></li>
+                </ul>
+                <ul class="matchup">
+                    <li class="team team-top"><span class="{{currentBracket.basket.round1[2].alies}} teamIcon"></span>{{currentBracket.basket.round1[2].name}}&nbsp;</span></li>
+                    <li class="scoreInput">Total Games:{{currentBracket.score.semiConf[1]}}</li>
+                    <li class="team team-bottom"><span class="{{currentBracket.basket.round1[3].alies}} teamIcon"></span>{{currentBracket.basket.round1[3].name}}&nbsp;</span></li>
+                </ul>
+            </div>	<!-- END ROUND TWO -->
+
+            <div class="round round-three">
+                <div class="round-details">Round 3<br/><span class="date">May 16</span></div>
+                <ul class="matchup">
+                    <li class="team team-top"><span class="{{currentBracket.basket.semiConf[0].alies}} teamIcon"></span>{{currentBracket.basket.semiConf[0].name}}&nbsp;</span></li>
+                    <li class="scoreInput">Total Games:{{currentBracket.score.conf[0]}}</li>
+                    <li class="team team-bottom"><span class="{{currentBracket.basket.semiConf[1].alies}} teamIcon"></span>{{currentBracket.basket.semiConf[1].name}}&nbsp;</span></li>
+                </ul>
+            </div>	<!-- END ROUND THREE -->
+        </div>
+
+        <div class="champion">
+
+            <div class="final">
+                <i class="fa fa-trophy"></i>
+                <div class="round-details">championship <br/><span class="date">June 1</span></div>
+                <ul class ="matchup championship">
+                    <li class="team team-top"><span class="{{currentBracket.basket.conf[0].alies}} teamIcon"></span>{{currentBracket.basket.conf[0].name}}<span class="vote-count">&nbsp;</span></li>
+                    <li class="scoreInput">Total Games:{{currentBracket.score.final[0]}}</li>
+                    <li class="team team-bottom"><span class="{{currentBracket.basket.conf[1].alies}} teamIcon"></span>{{currentBracket.basket.conf[1].name}}<span class="vote-count">&nbsp;</span></li>
+                </ul>
+            </div>
+
+            <div class="semis-r">
+                <div class="round-details">Champagin <br/><span class="date">June 12</span></div>
+                <ul class ="matchup championship">
+                    <li class="team team-top"><span class="{{currentBracket.basket.final[0].alies}} teamIcon"></span>{{currentBracket.basket.final[0].name}}<span class="vote-count">&nbsp;</span></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="split split-two">
+
+
+            <div class="round round-three">
+                <div class="round-details">Round 3<br/><span class="date">May 16</span></div>
+                <ul class="matchup">
+                    <li class="team team-top"><span class="{{currentBracket.basket.semiConf[2].alies}} teamIcon"></span>{{currentBracket.basket.semiConf[2].name}}&nbsp;</span></li>
+                    <li class="scoreInput">Total Games:{{currentBracket.score.conf[1]}}</li>
+                    <li class="team team-bottom"><span class="{{currentBracket.basket.semiConf[3].alies}} teamIcon"></span>{{currentBracket.basket.semiConf[3].name}}&nbsp;</span></li>
+                </ul>
+            </div>	<!-- END ROUND THREE -->
+
+            <div class="round round-two">
+                <div class="round-details">Round 2<br/><span class="date">May 1</span></div>
+                <ul class="matchup">
+                    <li class="team team-top"><span class="{{currentBracket.basket.round1[4].alies}} teamIcon"></span>{{currentBracket.basket.round1[4].name}}&nbsp;</span></li>
+                    <li class="scoreInput">Total Games:{{currentBracket.score.semiConf[2]}}</li>
+                    <li class="team team-bottom"><span class="{{currentBracket.basket.round1[5].alies}} teamIcon"></span>{{currentBracket.basket.round1[5].name}}&nbsp;</span></li>
+                </ul>
+                <ul class="matchup">
+                    <li class="team team-top"><span class="{{currentBracket.basket.round1[6].alies}} teamIcon"></span>{{currentBracket.basket.round1[6].name}}&nbsp;</span></li>
+                    <li class="scoreInput">Total Games:{{currentBracket.score.semiConf[3]}}</li>
+                    <li class="team team-bottom"><span class="{{currentBracket.basket.round1[7].alies}} teamIcon"></span>{{currentBracket.basket.round1[7].name}}&nbsp;</span></li>
+                </ul>
+            </div>	<!-- END ROUND TWO -->
+            <div class="round round-one current">
+                <div class="round-details">Round 1<br/><span class="date">April 15</span></div>
+                <ul class="matchup">
+                  <li class="team team-top"><span class="bos teamIcon"></span>1 Boston</span></li>
+                  <li class="scoreInput">Total Games:{{currentBracket.score.round1[4]}}</li>
+                  <li class="team team-bottom"><span class="chi teamIcon"></span>8 Chicago</span></li>
+                </ul>
+                <ul class="matchup">
+                    <li class="team team-top"><span class="was teamIcon"></span>4 Washington</span></li>
+                    <li class="scoreInput">Total Games:{{currentBracket.score.round1[7]}}</li>
+                    <li class="team team-bottom"><span class="atl teamIcon"></span>5 Atlanta</span></li>
+                </ul>
+                <ul class="matchup">
+                    <li class="team team-top"><span class="tor teamIcon"></span>3 Tronto</span></li>
+                    <li class="scoreInput">Total Games:{{currentBracket.score.round1[5]}}</li>
+                    <li class="team team-bottom"><span class="mil teamIcon"></span>6 Milwaukee</span></li>
+                </ul>
+                <ul class="matchup">
+                  <li class="team team-top"><span class="clc teamIcon"></span>2 Cleveland</span></li>
+                  <li class="scoreInput">Total Games:{{currentBracket.score.round1[6]}}</li>
+                  <li class="team team-bottom"><span class="ind teamIcon"></span>7 Indiana</span></li>
+
+                </ul>
+
+            </div>	<!-- END ROUND ONE -->
+        </div>
+    </div>
+</md-dialog>
