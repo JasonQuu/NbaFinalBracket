@@ -73,9 +73,9 @@ app.controller('AppCtrl',['$scope', '$http',function AppCtrl($scope, $http) {
         name: 'Milwaukee',
         alies: 'mil'
       },
-      mia: {
-        name: 'Miami',
-        alies: 'mia'
+      ind: {
+        name: 'Indiana',
+        alies: 'ind'
       },
       atl: {
         name: 'Atlanta',
@@ -95,7 +95,6 @@ app.controller('AppCtrl',['$scope', '$http',function AppCtrl($scope, $http) {
 
 
   $scope.setBasket = function(team, round, index){
-    console.log($scope.myBasket);
     $scope.myBasket.basket[round][index] = $scope.uiConfig.teams[team];
   };
 
@@ -118,9 +117,15 @@ app.controller('AppCtrl',['$scope', '$http',function AppCtrl($scope, $http) {
           final: [{}]
         },
         score: {
+            round1:[0,0,0,0,0,0,0,0],
+            semiConf: [0,0,0,0],
+            conf: [0,0],
+            final: [0]
         }
       };
-      $http.post("/api/newBasket", $scope.myBasket)
+      $http.post("/api/newBasket", $scope.myBasket).then(function(res){
+          $scope.allData = res;
+      });
     }
     $scope.uiConfig.showBasket = true;
   };
