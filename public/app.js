@@ -16,8 +16,8 @@ app.config(['$routeProvider', '$locationProvider',
         $locationProvider.html5Mode(false);
     }]);
 
-app.controller('AppCtrl',['$scope', '$http',function AppCtrl($scope, $http) {
-  let allData = [], result = {};
+app.controller('AppCtrl',['$scope', '$http', '$mdDialog',function AppCtrl($scope, $http, $mdDialog) {
+  let allData = [], result = {}, viewBracket;
   $scope.uiConfig = {
     showBasket: false,
     teams: {
@@ -132,6 +132,29 @@ app.controller('AppCtrl',['$scope', '$http',function AppCtrl($scope, $http) {
 
   $scope.saveMyBasket = function(){
     $http.post("/api/updateBasket", $scope.myBasket)
+  }
+
+  $scope.showBracket = function(bracket) {
+    viewBracket = bracket;
+    $mdDialog.show({
+      templateUrl: '/public/chart/viewBracket.html',
+      controller: DialogController,
+      parent: angular.element(document.body),
+      clickOutsideToClose:true,
+      fullscreen: false // Only for -xs, -sm breakpoints.
+    });
+  };
+
+  function DialogController($scope, $mdDialog) {
+    $scope.currentBracket=viewBracket;
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+
   }
 
   //getData();
