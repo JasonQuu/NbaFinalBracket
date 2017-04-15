@@ -107,32 +107,15 @@ app.controller('AppCtrl',['$scope', '$http', '$mdDialog',function AppCtrl($scope
     }
 
     if(!$scope.myBasket){
-      $scope.myBasket = {
-        user: user.email,
-        name: user.basketName,
-        basket: {
-          round1:[{},{},{},{}],
-          semiConf: [{},{},{},{}],
-          conf: [{},{}],
-          final: [{}]
-        },
-        score: {
-            round1:[0,0,0,0,0,0,0,0],
-            semiConf: [0,0,0,0],
-            conf: [0,0],
-            final: [0]
-        }
-      };
-      $http.post("/api/newBasket", $scope.myBasket).then(function(res){
-          $scope.allData = res;
-      });
+        alert('You haven\'t create a basket, sorry dude');
+    } else {
+        $scope.uiConfig.showBasket = true;
     }
-    $scope.uiConfig.showBasket = true;
   };
 
   $scope.saveMyBasket = function(){
     $http.post("/api/updateBasket", $scope.myBasket)
-  }
+  };
 
   $scope.showBracket = function(bracket) {
     viewBracket = bracket;

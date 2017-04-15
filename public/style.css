@@ -70,7 +70,7 @@ a:hover
 
 .container {
     max-width: 1200px;
-    margin: 0 20px;
+    margin: 0 auto;
     display: block;
     display: -webkit-box;
     display: -moz-box;
